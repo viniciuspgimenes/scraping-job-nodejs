@@ -1,6 +1,9 @@
+import * as dotenv from "dotenv";
 import axios from 'axios';
 import cheerio from 'cheerio';
 import Cheerio = cheerio.Cheerio;
+
+dotenv.config({ path: __dirname + '/../.env' });
 
 const AxiosInstance = axios.create();
 
@@ -19,7 +22,7 @@ interface CryptoResponse {
     data: Crypto[]
 }
 
-const apiUrl = 'http://localhost:8000';
+const apiUrl = process.env.API_URL;
 
 async function getAllCryptos(): Promise<CryptoResponse> {
     return AxiosInstance.get(`${apiUrl}/api/cryptos/`)
